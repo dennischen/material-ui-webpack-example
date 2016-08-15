@@ -27,9 +27,11 @@ const config = {
         warnings: false,
       },
     }),
+    //[Dennis]: this didn't work in production, js error always stop the build and output nothing
     // Allows error warnings but does not stop compiling.
-    new webpack.NoErrorsPlugin(),
-    // Transfer Files
+    // new webpack.NoErrorsPlugin(),
+    
+    // Transfer www file to in src/www to buildPath
     new TransferWebpackPlugin([
       {from: 'www'},
     ], path.resolve(__dirname, 'src')),

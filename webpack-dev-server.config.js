@@ -13,27 +13,43 @@ const config = {
   ],
   // Server Configuration options
   devServer: {
+    //[Dennis]: if didn't provide, it uses current folder when access to http://host:port/
     contentBase: 'src/www', // Relative directory for base of server
-    devtool: 'eval',
+
+    //[Dennis]: useless config, it looks like only care devtool in main config (not here)
+    // devtool: 'eval',
+
+    //[Dennis]: if set flase, will cause full page reload
     hot: true, // Live-reload
-    inline: true, //Enable inline mode Live-reload, can be set by --inline too in webpack-dev-server
+
+    //[Dennis]: can be set by parameter --inline in webpack-dev-server too
+    //When enable, access to http://host:port/ will provide hot reload too 
+    //(false will just provide content, but no hot reload)
+    inline: true, //Enable inline mode Live-reload
+    
     port: 3000, // Port Number
-    host: '0.0.0.0', // Change to '0.0.0.0' for external facing server
+    host: 'localhost', // Change to '0.0.0.0' for external facing server
   },
-  devtool: 'eval',
+  devtool: 'source-map',//'', 'eval', ..etc See https://webpack.github.io/docs/configuration.html#devtool
   output: {
     path: buildPath, // Path of output file
     filename: 'app.js', // Name of output file
   },
   plugins: [
+
+    // [Dennis]: if comment this, will cause dev-server - '[HMR] Hot Module Replacement' in browser
     // Enables Hot Modules Replacement
     new webpack.HotModuleReplacementPlugin(),
+
+    // [Dennis]: if comment this, when hot reload it will load the previous no-error version
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
-    // Transfer Files
-    new TransferWebpackPlugin([
-      {from: 'www'},
-    ], path.resolve(__dirname, 'src')),
+
+    //[Dennis]: useless plugin in dev, should config devServer.contentBase
+    // Transfer www file to in src/www to buildPath
+    // new TransferWebpackPlugin([
+    //   {from: 'www'},
+    // ], path.resolve(__dirname, 'src')),
   ],
   module: {
     loaders: [

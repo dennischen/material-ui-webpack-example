@@ -22,6 +22,13 @@ Note: To allow external viewing of the demo, change the following value in `webp
 host: 'localhost'  //Change to '0.0.0.0' for external facing server
 ```
 
+
+To build the application
+```
+npm run build
+```
+
+
 ## Description of [Webpack](http://webpack.github.io/docs/)
 
 Webpack is a module bundler that we are using to run our documentation site.
