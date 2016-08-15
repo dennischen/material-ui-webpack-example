@@ -6,11 +6,19 @@ const TransferWebpackPlugin = require('transfer-webpack-plugin');
 
 const config = {
   // Entry points to the project
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack/hot/only-dev-server',
-    path.join(__dirname, '/src/app/app.js'),
-  ],
+  entry: {
+    dev : [
+      'webpack/hot/dev-server',
+      'webpack/hot/only-dev-server'
+    ],
+    app : [
+      path.join(__dirname, '/src/app/app.js'),
+    ],
+    //[Dennis] this build whole material-ui to one vendor trunk which is large (1.xM when no compress)
+    // 'vendor-material-ui': ['material-ui'],
+    'vendor-material-ui': ['material-ui/styles','material-ui/RaisedButton','material-ui/Dialog','material-ui/FlatButton'],
+    'vendor-react': ['react', 'react-dom','react-tap-event-plugin'],
+  },
   // Server Configuration options
   devServer: {
     //[Dennis]: if didn't provide, it uses current folder when access to http://host:port/
@@ -33,7 +41,7 @@ const config = {
   devtool: 'source-map',//'', 'eval', ..etc See https://webpack.github.io/docs/configuration.html#devtool
   output: {
     path: buildPath, // Path of output file
-    filename: 'app.js', // Name of output file
+    filename: '[name].js', // Name of output file
   },
   plugins: [
 
@@ -50,6 +58,13 @@ const config = {
     // new TransferWebpackPlugin([
     //   {from: 'www'},
     // ], path.resolve(__dirname, 'src')),
+
+    //[Dennis] vendor code split, 
+    //the last name will has the core 'webpackJsonp' mehtod which must be put to first script in html file
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor-material-ui','vendor-react'],
+      minChunks: Infinity
+    })
   ],
   module: {
     loaders: [
