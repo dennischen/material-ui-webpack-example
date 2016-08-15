@@ -45,11 +45,11 @@ const config = {
   },
   plugins: [
 
-    // [Dennis]: if comment this, will cause dev-server - '[HMR] Hot Module Replacement' in browser
+    // [Dennis]: if disable this, will cause dev-server - '[HMR] Hot Module Replacement' in browser
     // Enables Hot Modules Replacement
     new webpack.HotModuleReplacementPlugin(),
 
-    // [Dennis]: if comment this, when hot reload it will load the previous no-error version
+    // [Dennis]: if enable this, when hot reload it will load the previous no-error version
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
 
@@ -60,7 +60,7 @@ const config = {
     // ], path.resolve(__dirname, 'src')),
 
     //[Dennis] vendor code split, 
-    //the last name will has the core 'webpackJsonp' mehtod which must be put to first script in html file
+    //the last trunk will has the core 'webpackJsonp' mehtod which must be put to first script in html file
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor-material-ui','vendor-react'],
       minChunks: Infinity
