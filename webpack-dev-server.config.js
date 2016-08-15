@@ -16,21 +16,21 @@ const config = {
     contentBase: 'src/www', // Relative directory for base of server
     devtool: 'eval',
     hot: true, // Live-reload
-    inline: true,
+    inline: true, //Enable inline mode Live-reload, can be set by --inline too in webpack-dev-server
     port: 3000, // Port Number
-    host: 'localhost', // Change to '0.0.0.0' for external facing server
+    host: '0.0.0.0', // Change to '0.0.0.0' for external facing server
   },
   devtool: 'eval',
   output: {
     path: buildPath, // Path of output file
-    filename: 'app.js',
+    filename: 'app.js', // Name of output file
   },
   plugins: [
     // Enables Hot Modules Replacement
     new webpack.HotModuleReplacementPlugin(),
     // Allows error warnings but does not stop compiling.
     new webpack.NoErrorsPlugin(),
-    // Moves files
+    // Transfer Files
     new TransferWebpackPlugin([
       {from: 'www'},
     ], path.resolve(__dirname, 'src')),
