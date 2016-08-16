@@ -10,6 +10,8 @@ import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import {Hello} from './Hello';
+
 const styles = {
   container: {
     textAlign: 'center',
@@ -55,7 +57,6 @@ class Main extends Component {
         onTouchTap={this.handleRequestClose}
       />
     );
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div style={styles.container}>
@@ -69,6 +70,7 @@ class Main extends Component {
           </Dialog>
           <h1>Material-UI</h1>
           <h2>example project</h2>
+          <Hello/>
           <RaisedButton
             label="Super Secret Password"
             secondary={true}

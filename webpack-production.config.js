@@ -12,8 +12,11 @@ console.log('Build path ',buildPath);
 var clean = argv.Xclean;
 //by -- --Xminify
 var minify = argv.Xminify;
+//by -- --XProduction
+//for react warn message stripping
+var production = argv.Xproduction
 
-console.log('Clean:',clean,', Minify:',minify);
+console.log('Xclean:', clean, ', Xminify:', minify, ', Xproduction', production);
 
 
 const config = {
@@ -38,7 +41,7 @@ const config = {
     // Define production build to allow React to strip out unnecessary checks
     new webpack.DefinePlugin({
       'process.env':{
-        'NODE_ENV': JSON.stringify('production')
+        'NODE_ENV': JSON.stringify(production?'production':'development')
       }
     }),
     //Minify the bundle
@@ -67,12 +70,20 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.js$/, // All .js files
+        test: /\.jsx?$/, // All .js, .jsx files
         loaders: ['babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
+        exclude: [nodeModulesPath],
+      },
+      {
+        test: /\.tsx?$/, // All .ts, .tsx files
+        loaders: ['ts-loader'],
         exclude: [nodeModulesPath],
       },
     ],
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+  }
 };
 
 //trim undefined dynamic plugin, e.g. clean, minify

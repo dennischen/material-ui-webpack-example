@@ -68,14 +68,21 @@ const config = {
   ],
   module: {
     loaders: [
+       {
+        test: /\.jsx?$/, // All .js, .jsx files
+        loaders: ['babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
+        exclude: [nodeModulesPath],
+      },
       {
-        // React-hot loader and
-        test: /\.js$/, // All .js files
-        loaders: ['react-hot', 'babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
+        test: /\.tsx?$/, // All .ts, .tsx files
+        loaders: ['ts-loader'],
         exclude: [nodeModulesPath],
       },
     ],
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+  }
 };
 
 module.exports = config;
