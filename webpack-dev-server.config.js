@@ -70,12 +70,12 @@ const config = {
     loaders: [
        {
         test: /\.jsx?$/, // All .js, .jsx files
-        loaders: ['babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
+        loaders: ['react-hot','babel-loader'], // react-hot is like browser sync and babel loads jsx and es6-7
         exclude: [nodeModulesPath],
       },
       {
         test: /\.tsx?$/, // All .ts, .tsx files
-        loaders: ['ts-loader'],
+        loaders: [/*'react-hot',*/'ts-loader'], // react-hot works with or without set again here, it might because we set it in jsx already
         exclude: [nodeModulesPath],
       },
     ],
