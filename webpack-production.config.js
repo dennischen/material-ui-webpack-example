@@ -22,6 +22,8 @@ console.log('Xclean:', clean, ', Xminify:', minify, ', Xproduction', production)
 const config = {
   entry: {
     app : [path.join(__dirname, '/src/app/app.js')],
+    appTS : [path.join(__dirname, '/src/app/appTS.tsx')],
+    common : [path.join(__dirname, '/src/app/Common.tsx')],
     //[Dennis] this build whole material-ui to one vendor trunk which is large (1.x M when no compressed)
     // 'vendor-material-ui': ['material-ui'],
     'vendor-material-ui': ['material-ui/styles','material-ui/RaisedButton','material-ui/Dialog','material-ui/FlatButton'],
@@ -63,7 +65,7 @@ const config = {
     //[Dennis] vendor code split, 
     //the last name will has the core 'webpackJsonp' mehtod which must be put to first script in html file
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor-material-ui','vendor-react'],
+      names: ['common','vendor-material-ui','vendor-react'],
       minChunks: Infinity
     })
   ],

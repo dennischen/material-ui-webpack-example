@@ -1,8 +1,12 @@
+/// <reference path="./dt/react/react.d.ts" />
+/// <reference path="./dt/react/react-dom.d.ts" />
+/// <reference path="./dt/material-ui/material-ui.d.ts" />
+
 /**
  * In this file, we create a React component
  * which incorporates components provided by Material-UI.
  */
-import React, {Component} from 'react';
+import React = require('react');
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import {deepOrange500} from 'material-ui/styles/colors';
@@ -25,8 +29,8 @@ const muiTheme = getMuiTheme({
   },
 });
 
-class Main extends Component {
-  constructor(props, context) {
+export default class MainTS extends React.Component<any,any> {
+  constructor(props:any, context:any) {
     super(props, context);
 
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -62,7 +66,7 @@ class Main extends Component {
         <div style={styles.container}>
           <Dialog
             open={this.state.open}
-            title="Super Secret Password 1"
+            title="Super Secret Password 2"
             actions={standardActions}
             onRequestClose={this.handleRequestClose}
           >
@@ -72,8 +76,7 @@ class Main extends Component {
           <h2>example project</h2>
           <Hello/>
           <RaisedButton
-            label="Super Secret Password 1"
-            secondary={true}
+            label="Super Secret Password 2"
             onTouchTap={this.handleTouchTap}
           />
         </div>
@@ -81,5 +84,3 @@ class Main extends Component {
     );
   }
 }
-
-export default Main;

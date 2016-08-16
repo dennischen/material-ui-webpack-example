@@ -5,7 +5,7 @@ import React = require('react');
 import ReactDOM = require('react-dom');
 import FlatButton from 'material-ui/FlatButton';
 
-import {sayHello} from './Hello2';
+import {sayHello} from './Util';
 
 export class Hello
     extends React.Component<any, any>{

@@ -11,9 +11,9 @@ const config = {
       'webpack/hot/dev-server',
       'webpack/hot/only-dev-server'
     ],
-    app : [
-      path.join(__dirname, '/src/app/app.js'),
-    ],
+    app : [path.join(__dirname, '/src/app/app.js')],
+    appTS : [path.join(__dirname, '/src/app/appTS.tsx')],
+    common : [path.join(__dirname, '/src/app/Common.tsx')],
     //[Dennis] this build whole material-ui to one vendor trunk which is large (1.xM when no compress)
     // 'vendor-material-ui': ['material-ui'],
     'vendor-material-ui': ['material-ui/styles','material-ui/RaisedButton','material-ui/Dialog','material-ui/FlatButton'],
@@ -62,7 +62,7 @@ const config = {
     //[Dennis] vendor code split, 
     //the last trunk will has the core 'webpackJsonp' mehtod which must be put to first script in html file
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor-material-ui','vendor-react'],
+      names: ['common','vendor-material-ui','vendor-react'],
       minChunks: Infinity
     })
   ],
@@ -75,7 +75,7 @@ const config = {
       },
       {
         test: /\.tsx?$/, // All .ts, .tsx files
-        loaders: [/*'react-hot',*/'ts-loader'], // react-hot works with or without set again here, it might because we set it in jsx already
+        loaders: ['react-hot','ts-loader'], // react-hot is required to host reload ts and tsx
         exclude: [nodeModulesPath],
       },
     ],
